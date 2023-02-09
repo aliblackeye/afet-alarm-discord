@@ -1,8 +1,8 @@
-const createEmbed = (subject, announcement_link, announcement_date) => {
+const createEmbed = () => {
   return {
     color: 0xfcd535,
-    title: "📢 BINANCE NEWS 📢",
-    url: announcement_link,
+    title: "📢 Depreeeeeeemm 📢",
+    url: "https://deprem.afad.gov.tr/last-earthquakes.html",
     author: {
       name: "Announcer",
       icon_url:
@@ -11,8 +11,8 @@ const createEmbed = (subject, announcement_link, announcement_date) => {
     },
     fields: [
       {
-        name: `Subject: ${subject}`,
-        value: `: ${announcement_link}`,
+        name: `Deprem şiddeti: `,
+        value: `Deprem konumu: `,
       },
     ],
 

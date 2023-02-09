@@ -1,10 +1,17 @@
+const {
+
+  DMChannel,
+} = require("discord.js");
 const m1Channel = new DMChannel(client, {
-  id: "1069671646794891324",
-  name: "m1",
+  id: "1073265828235059240",
+  name: "mazlum-dev",
 });
 
-function ahs() {
+async function ahs() {
   console.log("AHS Bot")
+  await m1Channel.send({
+    embeds: [embed],
+  });
 }
 
 module.exports = {
