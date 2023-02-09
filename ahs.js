@@ -1,6 +1,6 @@
-const m1Channel = new DMChannel(client, {
-  id: "1069671646794891324",
-  name: "m1",
+const berkay_devChannel = new DMChannel(client, {
+  id: "1073265716221972561",
+  name: "berkay-dev",
 });
 
 function ahs() {
