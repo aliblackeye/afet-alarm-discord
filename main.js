@@ -71,13 +71,14 @@ async function ahs() {
   data.each(
     async function () {
       let tdData = $(this).find("td");
+      
+      if (tdData === "") return;
 
       let tarih = tdData.slice(0, 1).text();
       let derinlik = tdData.slice(2, 4).text();
       let büyüklük = tdData.slice(4, 6).text();
       let yer = tdData.slice(5, 7).text();
       
-      if (tdData === "") return;
       const embed = createEarthquake(tarih,derinlik,büyüklük,yer,url);
       await channel.send({
         //content: tdData
