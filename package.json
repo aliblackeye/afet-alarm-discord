@@ -1,10 +1,10 @@
 {
-  "name": "m1bot",
+  "name": "ahs",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
-    "discord": "node deploy-commands.js && nodemon discord.js"
+    "discord": "node deploy-commands.js && nodemon main.js"
   },
   "keywords": [],
   "author": "",
