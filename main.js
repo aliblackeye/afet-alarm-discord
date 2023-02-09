@@ -1,9 +1,4 @@
-const {
-  Client,
-  Collection,
-  GatewayIntentBits,
-  DMChannel,
-} = require("discord.js");
+const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
@@ -14,35 +9,19 @@ app.use(express.json());
 app.use(express.static("express"));
 app.use(cors());
 
-app.get("/", (req, res) => {
-  try {
-    res.status(200).send({ success: true, message: "Aktif!" });
-  } catch (error) {
-    res.status(500).send({ success: false, message: "Bir hata olustu." });
-  }
-});
+// AHS Bot
+const ahs = require("ahs.js");
 
-const PORT = 5001;
-app.listen(PORT, () => {
-  console.log("Server is listening on port:", PORT);
-});
 // Import Utils
 const createEmbed = require("./utils/createEmbed.js");
 
 // Import Config
-const { API_KEY, API_SECRET, BASE_URL, TOKEN } = require("./config.json");
+const { BASE_URL, TOKEN } = require("./config.json");
 
 axios.defaults.baseURL = BASE_URL;
-axios.defaults.headers.common["binance-api-key"] = API_KEY;
-axios.defaults.headers.common["binance-api-secret"] = API_SECRET;
 axios.defaults.headers.common["Content-Type"] = "application/json";
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-
-const m1Channel = new DMChannel(client, {
-  id: "1069671646794891324",
-  name: "m1",
-});
 
 // Event Handler
 const eventsPath = path.join(__dirname, "events");
@@ -83,3 +62,5 @@ for (const file of commandFiles) {
 // Login to Discord with your client's token
 client.login(TOKEN);
 
+// Ahs kodları
+ahs();
