@@ -1,18 +1,29 @@
-const createEmbed = (subject, announcement_link, announcement_date) => {
+const { Colors } = require("discord.js");
+
+const createEarthquake = (tarih,derinlik,büyüklük,yer, announcement_link) => {
   return {
-    color: 0xfcd535,
-    title: "📢 BINANCE NEWS 📢",
+    color: Colors.Red,
+    title: "📢 YENİ DEPREM 📢",
     url: announcement_link,
     author: {
-      name: "Announcer",
-      icon_url:
-        "https://seeklogo.com/images/B/binance-coin-bnb-logo-CD94CC6D31-seeklogo.com.png",
-      url: "https://discord.gg/ee5bnvshcE",
+      name: "AHS",
     },
     fields: [
       {
-        name: `Subject: ${subject}`,
-        value: `: ${announcement_link}`,
+        name: `Depremin Konumu: ${yer}`,
+        value: ``,
+      },
+      {
+        name: `Depremin Büyüklüğü: ${büyüklük}`,
+        value: ``,
+      },
+      {
+        name: `Depremin Zamanı: ${tarih}`,
+        value: ``,
+      },
+      {
+        name: `Depremin Derinliği: ${derinlik}`,
+        value: ``,
       },
     ],
 
@@ -20,4 +31,4 @@ const createEmbed = (subject, announcement_link, announcement_date) => {
   };
 };
 
-module.exports = createEmbed;
+module.exports = createEarthquake;

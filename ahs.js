@@ -1,12 +1,9 @@
-const {
-
-  DMChannel,
-} = require("discord.js");
+const { DMChannel,Client, GatewayIntentBits } = require("discord.js");
 
 // Import Utils
 const createEmbed = require("./utils/createEmbed.js");
 
-const embed = createEmbed(symbol, change.toFixed(2), symbolsPrices[symbol].oldPrice, newPrice);
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 const berkay_devChannel = new DMChannel(client, {
   id: "1073265716221972561",

@@ -1,4 +1,5 @@
-const { Client, Collection, GatewayIntentBits } = require("discord.js");
+const { Client, DMChannel, Collection, GatewayIntentBits } = require("discord.js");
+const cheerio = require('cheerio');
 const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
@@ -9,11 +10,7 @@ app.use(express.json());
 app.use(express.static("express"));
 app.use(cors());
 
-// AHS Bot
-const ahs = require("ahs.js");
 
-// Import Utils
-const createEmbed = require("./utils/createEmbed.js");
 
 // Import Config
 const { BASE_URL, TOKEN } = require("./config.json");
@@ -58,9 +55,42 @@ for (const file of commandFiles) {
     );
   }
 }
+const channel = new DMChannel(client, {
+  id: "1073265716221972561",
+  name: "berkay-dev",
+});
+// Import Utils
+const createEarthquake = require("./utils/createEmbed.js");
+
+const url = "https://deprem.afad.gov.tr/last-earthquakes.html"
+
+async function ahs() {
+  const response = await axios.get(url);
+  const $ = cheerio.load(response.data);
+  const data = $("tbody tr");
+  data.each(
+    async function () {
+      let tdData = $(this).find("td");
+
+      let tarih = tdData.slice(0, 1).text();
+      let derinlik = tdData.slice(2, 4).text();
+      let büyüklük = tdData.slice(4, 6).text();
+      let yer = tdData.slice(5, 7).text();
+      
+      if (tdData === "") return;
+      const embed = createEarthquake(tarih,derinlik,büyüklük,yer,url);
+      await channel.send({
+        //content: tdData
+        embeds: [embed]
+      })
+      
+    }
+  );
+}
+
+
 
 // Login to Discord with your client's token
 client.login(TOKEN);
 
-// Ahs kodları
 ahs();
