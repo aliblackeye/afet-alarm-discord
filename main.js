@@ -76,8 +76,6 @@ async function ahs() {
     oncekiDepremTarihi = tarih;
     let buyukluk = Number(sonDeprem.slice(4, 6).text().slice(2, 5));
 
-    console.log(tarih)
-    console.log(buyukluk)
     if (buyukluk >= buyuklukEsigi) {
       let derinlik = sonDeprem.slice(2, 4).text();
       let yer = sonDeprem.slice(5, 7).text();
