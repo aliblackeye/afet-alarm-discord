@@ -6,7 +6,7 @@ const createEarthquake = (tarih,derinlik,büyüklük,yer, announcement_link) => 
     title: "📢 YENİ DEPREM 📢",
     url: announcement_link,
     author: {
-      name: "AHS",
+      name: "AFET HABER SİSTEMİ",
     },
     fields: [
       {

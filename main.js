@@ -64,30 +64,36 @@ const createEarthquake = require("./utils/createEmbed.js");
 
 const url = "https://deprem.afad.gov.tr/last-earthquakes.html"
 
+const buyuklukEsigi = 4.5;
+let oncekiDepremTarihi = "";
+
 async function ahs() {
   const response = await axios.get(url);
   const $ = cheerio.load(response.data);
-  const data = $("tbody tr");
-  data.each(
-    async function () {
-      let tdData = $(this).find("td");
-      
-      if (tdData === "") return;
+  const sonDeprem = $("tbody tr td");
+  let tarih = sonDeprem.slice(0, 1).text();
+  if (tarih != oncekiDepremTarihi) {
+    oncekiDepremTarihi = tarih;
+    let buyukluk = Number(sonDeprem.slice(4, 6).text().slice(2, 5));
 
-      let tarih = tdData.slice(0, 1).text();
-      let derinlik = tdData.slice(2, 4).text();
-      let büyüklük = tdData.slice(4, 6).text();
-      let yer = tdData.slice(5, 7).text();
-      
-      const embed = createEarthquake(tarih,derinlik,büyüklük,yer,url);
+    console.log(tarih)
+    console.log(buyukluk)
+    if (buyukluk >= buyuklukEsigi) {
+      let derinlik = sonDeprem.slice(2, 4).text();
+      let yer = sonDeprem.slice(5, 7).text();
+      const embed = createEarthquake(tarih, derinlik, buyukluk, yer, url);
       await channel.send({
-        //content: tdData
+        //content: sonDeprem
         embeds: [embed]
       })
-      
     }
-  );
+  }
+
 }
+
+setInterval(() => {
+  ahs();
+}, 5 * 1000)
 
 
 
